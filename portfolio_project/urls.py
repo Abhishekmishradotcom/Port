@@ -18,10 +18,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from Myportfolio.views import reset_admin  
+from Myportfolio.views import contact_view
+# from Myportfolio.views import reset_admin  
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('reset-admin/', reset_admin),
+ path('contact/', contact_view, name='contact'),
     path('', include('Myportfolio.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

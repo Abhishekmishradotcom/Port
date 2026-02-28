@@ -1,6 +1,8 @@
 from .models import Project
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
+from .models import ContactMessage
+
 
 
 def index(request):
@@ -13,13 +15,24 @@ def index(request):
 def home(request):
     projects = Project.objects.all()
     print(projects)
-    return render(request, 'Myportfolio/index.html', {
+    return render(request, 'Myportfolio/base.html', {
         'projects': projects
     })
     
 
-def reset_admin(request):
-    user = User.objects.get(username='yourusername')
-    user.set_password('newpassword123')
-    user.save()
-    return HttpResponse("Password Reset Done")
+
+def contact_view(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+
+        ContactMessage.objects.create(
+            name=name,
+            email=email,
+            message=message
+        )
+
+        return redirect('/')
+
+    return redirect('/')
