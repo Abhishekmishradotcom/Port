@@ -11,13 +11,14 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
-
 import os
+import cloudinary
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+# load_dotenv()
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
@@ -43,16 +44,36 @@ INSTALLED_APPS = [
     'cloudinary_storage',
 ]
 
+
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': 'de1f1bgj8',
+#     'API_KEY': '719414213275972',
+#     'API_SECRET': 'nbhTijstkgw9xaGjr2mpB7SA2cg',
+# }
+
+cloudinary.config(
+    cloud_name="de1f1bgj8",
+    api_key="719414213275972",
+    api_secret="nbhTijstkgw9xaGjr2mpB7SA2cg",
+    secure=True
+)
+
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'de1f1bgj8',
-    'API_KEY': '719414213275972',
-    'API_SECRET': 'nbhTijstkgw9xaGjr2mpB7SA2cg',
-}
+
+# cloudinary.config(
+#     cloud_name="de1f1bgj8",
+#     api_key="719414213275972",
+#     api_secret="9SbXyWVIfLeRsmI8f2WUJxWxANI"
+# )
+
+# CLOUDINARY_URL='cloudinary://719414213275972:9SbXyWVIfLeRsmI8f2WUJxWxANI@de1f1bgj8'
+
+# cloudinary.config(secure=True)
 
 
+# print("Cloud Name:", CLOUDINARY_STORAGE['API_KEY'])
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
       'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -129,8 +150,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-MEDIA_ROOT = BASE_DIR / 'media'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
