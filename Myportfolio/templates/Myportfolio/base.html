@@ -140,12 +140,12 @@
         <!-- Project Cards -->
         <div class="card-wrapper">
           {% for project in projects %}
-          <div class="card">
-            <h3>{{ project.title }}</h3>
+          <div class="card" style="height: 450px; text-align: center; font-family: Times New RomanGeorgia;">
+            <h2>{{ project.title }}</h2>
             {% if project.image %}
             <img src="{{ project.image.url }}" alt="{{ project.title }}" />
             {% endif %}
-            <p>{{ project.description }}</p>
+            <p style="font-size: 15px;">{{ project.description }}</p>
 
             <div class="card-footer">
               {% if project.project_url %}
